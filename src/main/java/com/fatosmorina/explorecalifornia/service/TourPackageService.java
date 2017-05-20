@@ -9,4 +9,7 @@ import com.fatosmorina.explorecalifornia.repository.TourPackageRepository;
 @Service
 public class TourPackageService {
 
+    @Autowired
+    private TourPackageRepository tourPackageRepository;
+
 }
