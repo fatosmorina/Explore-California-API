@@ -49,6 +49,7 @@ public class TourPackage implements Serializable {
     }
 
     @Override
-        public int hashCode() {
-            return Objects.hash(code, name);
-        }
+    public int hashCode() {
+        return Objects.hash(code, name);
+    }
+}
