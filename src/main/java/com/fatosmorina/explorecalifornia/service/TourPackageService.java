@@ -22,4 +22,8 @@ public class TourPackageService {
     public Iterable<TourPackage> lookup() {
         return tourPackageRepository.findAll();
     }
+
+    public long total() {
+        return tourPackageRepository.count();
+    }
 }
