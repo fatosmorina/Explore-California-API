@@ -28,4 +28,8 @@ public class TourService {
     public Iterable<Tour> lookup() {
         return tourRepository.findAll();
     }
+
+    public long total() {
+        return tourRepository.count();
+    }
 }
