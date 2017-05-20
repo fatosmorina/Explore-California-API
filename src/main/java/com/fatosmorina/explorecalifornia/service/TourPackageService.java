@@ -12,4 +12,11 @@ public class TourPackageService {
     @Autowired
     private TourPackageRepository tourPackageRepository;
 
+    public TourPackage createTourPackage(String code, String name) {
+        if (!tourPackageRepository.exists(code)) {
+            tourPackageRepository.save(new TourPackage(code, name));
+        }
+        return null;
+    }
+
 }
