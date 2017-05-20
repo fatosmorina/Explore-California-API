@@ -19,4 +19,7 @@ public class TourPackageService {
         return null;
     }
 
+    public Iterable<TourPackage> lookup() {
+        return tourPackageRepository.findAll();
+    }
 }
