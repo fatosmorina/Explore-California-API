@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.fatosmorina.explorecalifornia.domain.TourPackage;
 
-public interface TourPackageRepository extends CrudRepository<TourPackage, Integer> {
+public interface TourPackageRepository extends CrudRepository<TourPackage, String> {
 
 }
