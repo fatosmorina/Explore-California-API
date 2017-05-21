@@ -1,11 +1,14 @@
 package com.fatosmorina.explorecalifornia.web;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +37,17 @@ public class TourRatingController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void createTourRating(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
-        Tour tour = getTour(tourId);
+        Tour tour = verifyTour(tourId);
         tourRatingRepository.save(new TourRating(new TourRatingPk(tour, ratingDto.getCustomerId()), ratingDto.getScore(), ratingDto.getComment()));
+    }
+
+    @GetMapping
+    public List<RatingDto> getAllRatingsForTour(@PathVariable(value = "tourId") int tourId) {
+        verifyTour(tourId);
+        return tourRatingRepository.findByPkTourId(tourId)
+            .stream()
+            .map(tourRating -> toDto(tourRating))
+            .collect(Collectors.toList());
     }
 
     private RatingDto toDto(TourRating tourRating) {
@@ -43,7 +55,7 @@ public class TourRatingController {
             .getCustomerId());
     }
 
-    private Tour getTour(int tourId) {
+    private Tour verifyTour(int tourId) {
         Tour tour = tourRepository.findOne(tourId);
         if (tour == null) {
             throw new NoSuchElementException("Tour with ID: " + tourId + " does not exist");
