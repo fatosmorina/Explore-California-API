@@ -22,10 +22,7 @@ public interface TourRepository extends PagingAndSortingRepository<Tour, Integer
 
     @Override
     @RestResource(exported = false)
-    default void delete(Integer id) {
-        // TODO Auto-generated method stub
-
-    }
+    void delete(Integer id);
 
     @Override
     @RestResource(exported = false)
