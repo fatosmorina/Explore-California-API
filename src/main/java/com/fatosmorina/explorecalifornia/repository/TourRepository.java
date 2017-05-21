@@ -10,4 +10,11 @@ import com.fatosmorina.explorecalifornia.domain.Tour;
 
 public interface TourRepository extends PagingAndSortingRepository<Tour, Integer> {
     List<Tour> findByTourPackageCode(@Param("code") String code, Pageable pageable);
+
+    @Override
+    default <S extends Tour> S save(S entity) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
