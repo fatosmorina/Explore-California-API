@@ -3,7 +3,10 @@ package com.fatosmorina.explorecalifornia.web;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatosmorina.explorecalifornia.domain.Tour;
@@ -34,6 +37,12 @@ public class TourRatingController {
             throw new NoSuchElementException("Tour with ID: " + tourId + " does not exist");
         }
         return tour;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NoSuchElementException.class)
+    public String return400(NoSuchElementException exception) {
+        return exception.getMessage();
     }
 
 }
