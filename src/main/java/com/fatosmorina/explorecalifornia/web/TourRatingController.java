@@ -61,6 +61,14 @@ public class TourRatingController {
         return new AbstractMap.SimpleEntry<String, Double>("average", average.isPresent() ? average.getAsDouble() : null);
     }
 
+    @RequestMapping(method = RequestMethod.PUT)
+    public RatingDto updateTour(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
+        TourRating tourRating = verifyTourRating(tourId, ratingDto.getCustomerId());
+        tourRating.setScore(ratingDto.getScore());
+        tourRating.setComment(ratingDto.getComment());
+        return toDto(tourRatingRepository.save(tourRating));
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
     public String return400(NoSuchElementException exception) {
