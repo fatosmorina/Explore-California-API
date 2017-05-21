@@ -22,6 +22,9 @@ public class RatingDto {
         this.customerId = customerId;
     }
 
+    protected RatingDto() {
+    }
+
     public Integer getScore() {
         return score;
     }
