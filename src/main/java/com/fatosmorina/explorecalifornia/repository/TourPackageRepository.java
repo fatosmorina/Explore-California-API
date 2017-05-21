@@ -17,11 +17,7 @@ public interface TourPackageRepository extends CrudRepository<TourPackage, Strin
 
     @Override
     @RestResource(exported = false)
-    default <S extends TourPackage> Iterable<S> save(Iterable<S> entities) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
+    <S extends TourPackage> Iterable<S> save(Iterable<S> entities);
     @Override
     @RestResource(exported = false)
     default void delete(String id) {
