@@ -18,10 +18,7 @@ public interface TourRepository extends PagingAndSortingRepository<Tour, Integer
 
     @Override
     @RestResource(exported = false)
-    default <S extends Tour> Iterable<S> save(Iterable<S> entities) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    <S extends Tour> Iterable<S> save(Iterable<S> entities);
 
     @Override
     @RestResource(exported = false)
