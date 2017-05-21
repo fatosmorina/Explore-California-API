@@ -70,8 +70,9 @@ public class TourRatingController {
     private TourRating verifyTourRating(int tourId, int customerId) {
         TourRating tourRating = tourRatingRepository.findByPkTourIdAndPkCustomerId(tourId, customerId);
         if (tourRating == null) {
-            throw new NoSuchElementException("TourRating pair for ");
+            throw new NoSuchElementException("TourRating pair for request(" + tourId + " for customer " + customerId);
         }
+        return tourRating;
     }
 
     private RatingDto toDto(TourRating tourRating) {
@@ -82,8 +83,8 @@ public class TourRatingController {
     private Tour verifyTour(int tourId) {
         Tour tour = tourRepository.findOne(tourId);
         if (tour == null) {
-            throw new NoSuchElementException("Tour with ID: " + tourId");
+            throw new NoSuchElementException("Tour with ID: " + tourId);
         }
         return tour;
-
+    }
 }
