@@ -37,6 +37,12 @@ public interface TourPackageRepository extends CrudRepository<TourPackage, Strin
         
     }
 
+    @Override
+    @RestResource(exported = false)
+    default void delete(Iterable<? extends TourPackage> entities) {
+        // TODO Auto-generated method stub
+        
+    }
 
    
 }
