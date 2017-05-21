@@ -22,27 +22,32 @@ public interface TourPackageRepository extends CrudRepository<TourPackage, Strin
         // TODO Auto-generated method stub
         return null;
     }
-    
+
     @Override
     @RestResource(exported = false)
     default void delete(String id) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     @RestResource(exported = false)
     default void delete(TourPackage entity) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     @RestResource(exported = false)
     default void delete(Iterable<? extends TourPackage> entities) {
         // TODO Auto-generated method stub
-        
+
     }
 
-   
+    @Override
+    @RestResource(exported = false)
+    default void deleteAll() {
+        // TODO Auto-generated method stub
+    }
+
 }
