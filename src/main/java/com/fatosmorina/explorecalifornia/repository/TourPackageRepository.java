@@ -33,8 +33,6 @@ public interface TourPackageRepository extends CrudRepository<TourPackage, Strin
 
     @Override
     @RestResource(exported = false)
-    default void deleteAll() {
-        // TODO Auto-generated method stub
-    }
+    void deleteAll();
 
 }
