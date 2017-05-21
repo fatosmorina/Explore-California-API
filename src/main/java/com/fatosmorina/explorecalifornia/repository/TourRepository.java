@@ -14,9 +14,7 @@ public interface TourRepository extends PagingAndSortingRepository<Tour, Integer
 
     @Override
     @RestResource(exported = false)
-    default <S extends Tour> S save(S entity) {
-        return null;
-    }
+    <S extends Tour> S save(S entity);
 
     @Override
     @RestResource(exported = false)
