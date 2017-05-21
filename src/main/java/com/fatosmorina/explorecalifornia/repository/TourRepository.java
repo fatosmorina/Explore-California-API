@@ -31,7 +31,6 @@ public interface TourRepository extends PagingAndSortingRepository<Tour, Integer
         // TODO Auto-generated method stub
 
     }
-    
 
     @Override
     @RestResource(exported = false)
@@ -39,7 +38,6 @@ public interface TourRepository extends PagingAndSortingRepository<Tour, Integer
         // TODO Auto-generated method stub
 
     }
-    
 
     @Override
     @RestResource(exported = false)
@@ -48,7 +46,11 @@ public interface TourRepository extends PagingAndSortingRepository<Tour, Integer
 
     }
 
+    @Override
+    @RestResource(exported = false)
+    default void deleteAll() {
+        // TODO Auto-generated method stub
 
-
+    }
 
 }
