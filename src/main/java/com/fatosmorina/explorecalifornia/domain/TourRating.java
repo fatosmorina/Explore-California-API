@@ -18,13 +18,6 @@ public class TourRating {
     @Column
     private String comment;
 
-    /**
-     * Create a fully initialized TourRating.
-     *
-     * @param pk         primiary key of a tour and customer id.
-     * @param score      Integer score (1-5)
-     * @param comment    Optional comment from the customer
-     */
     public TourRating(TourRatingPk pk, Integer score, String comment) {
         this.pk = pk;
         this.score = score;
@@ -36,21 +29,17 @@ public class TourRating {
 
     @Override
     public String toString() {
-        return "TourRating{" +
-                "pk=" + pk +
-                ", score=" + score +
-                ", comment='" + comment + '\'' +
-                '}';
+        return "TourRating{" + "pk=" + pk + ", score=" + score + ", comment='" + comment + '\'' + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         TourRating that = (TourRating) o;
-        return Objects.equals(pk, that.pk) &&
-                Objects.equals(score, that.score) &&
-                Objects.equals(comment, that.comment);
+        return Objects.equals(pk, that.pk) && Objects.equals(score, that.score) && Objects.equals(comment, that.comment);
     }
 
     @Override
