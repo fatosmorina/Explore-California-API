@@ -62,7 +62,7 @@ public class TourRatingController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public RatingDto updateTourWithPatch(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
+    public RatingDto updateTourWithPut(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
         TourRating tourRating = verifyTourRating(tourId, ratingDto.getCustomerId());
         tourRating.setScore(ratingDto.getScore());
         tourRating.setComment(ratingDto.getComment());
