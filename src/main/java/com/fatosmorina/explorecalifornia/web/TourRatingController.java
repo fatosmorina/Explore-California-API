@@ -67,6 +67,13 @@ public class TourRatingController {
         return exception.getMessage();
     }
 
+    private TourRating verifyTourRating(int tourId, int customerId) {
+        TourRating tourRating = tourRatingRepository.findByPkTourIdAndPkCustomerId(tourId, customerId);
+        if (tourRating == null) {
+            throw new NoSuchElementException("TourRating pair for ");
+        }
+    }
+
     private RatingDto toDto(TourRating tourRating) {
         return new RatingDto(tourRating.getScore(), tourRating.getComment(), tourRating.getPk()
             .getCustomerId());
@@ -75,7 +82,7 @@ public class TourRatingController {
     private Tour verifyTour(int tourId) {
         Tour tour = tourRepository.findOne(tourId);
         if (tour == null) {
-            throw new NoSuchElementException("Tour with ID: " + tourId + " does not exist");
+            throw new NoSuchElementException("Tour with ID: " + tourId");
         }
         return tour;
 
