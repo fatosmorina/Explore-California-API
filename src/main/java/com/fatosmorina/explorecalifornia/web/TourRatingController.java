@@ -61,6 +61,12 @@ public class TourRatingController {
         return new AbstractMap.SimpleEntry<String, Double>("average", average.isPresent() ? average.getAsDouble() : null);
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NoSuchElementException.class)
+    public String return400(NoSuchElementException exception) {
+        return exception.getMessage();
+    }
+
     private RatingDto toDto(TourRating tourRating) {
         return new RatingDto(tourRating.getScore(), tourRating.getComment(), tourRating.getPk()
             .getCustomerId());
@@ -72,12 +78,5 @@ public class TourRatingController {
             throw new NoSuchElementException("Tour with ID: " + tourId + " does not exist");
         }
         return tour;
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NoSuchElementException.class)
-    public String return400(NoSuchElementException exception) {
-        return exception.getMessage();
-    }
 
 }
