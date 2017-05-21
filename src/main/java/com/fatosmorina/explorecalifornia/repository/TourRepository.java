@@ -30,10 +30,7 @@ public interface TourRepository extends PagingAndSortingRepository<Tour, Integer
 
     @Override
     @RestResource(exported = false)
-    default void delete(Iterable<? extends Tour> entities) {
-        // TODO Auto-generated method stub
-
-    }
+    void delete(Iterable<? extends Tour> entities);
 
     @Override
     @RestResource(exported = false)
