@@ -1,14 +1,15 @@
 package com.fatosmorina.explorecalifornia.web;
 
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,13 +42,23 @@ public class TourRatingController {
         tourRatingRepository.save(new TourRating(new TourRatingPk(tour, ratingDto.getCustomerId()), ratingDto.getScore(), ratingDto.getComment()));
     }
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     public List<RatingDto> getAllRatingsForTour(@PathVariable(value = "tourId") int tourId) {
         verifyTour(tourId);
         return tourRatingRepository.findByPkTourId(tourId)
             .stream()
             .map(tourRating -> toDto(tourRating))
             .collect(Collectors.toList());
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/average")
+    public AbstractMap.SimpleEntry<String, Double> getAverage(@PathVariable(value = "tourId") int tourId) {
+        verifyTour(tourId);
+        List<TourRating> tourRatings = tourRatingRepository.findByPkTourId(tourId);
+        OptionalDouble average = tourRatings.stream()
+            .mapToInt(TourRating::getScore)
+            .average();
+        return new AbstractMap.SimpleEntry<String, Double>("average", average.isPresent() ? average.getAsDouble() : null);
     }
 
     private RatingDto toDto(TourRating tourRating) {
