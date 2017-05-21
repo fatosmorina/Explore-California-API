@@ -69,7 +69,7 @@ public class TourRatingController {
         return toDto(tourRatingRepository.save(tourRating));
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PATCH)
     public RatingDto updateTourWithPatch(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
         TourRating tourRating = verifyTourRating(tourId, ratingDto.getCustomerId());
         Integer score = ratingDto.getScore();
