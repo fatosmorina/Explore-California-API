@@ -83,6 +83,12 @@ public class TourRatingController {
         return toDto(tourRatingRepository.save(tourRating));
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{customerId}")
+    public void delete(@PathVariable(value = "tourId") int tourId, @PathVariable("customerId") int customerId) {
+        TourRating tourRating = verifyTourRating(tourId, customerId);
+        tourRatingRepository.delete(tourRating);
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
     public String return400(NoSuchElementException exception) {
