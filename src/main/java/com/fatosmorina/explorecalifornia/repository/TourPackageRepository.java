@@ -23,4 +23,12 @@ public interface TourPackageRepository extends CrudRepository<TourPackage, Strin
         return null;
     }
 
+    @Override
+    @RestResource(exported = false)
+    default boolean exists(String id) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    
 }
