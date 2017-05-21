@@ -7,6 +7,8 @@ import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -44,12 +46,14 @@ public class TourRatingController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<RatingDto> getAllRatingsForTour(@PathVariable(value = "tourId") int tourId, Pageable pageable) {
-        verifyTour(tourId);
-        return tourRatingRepository.findByPkTourId(tourId)
+    public Page<RatingDto> getAllRatingsForTour(@PathVariable(value = "tourId") int tourId, Pageable pageable) {
+        Tour tour = verifyTour(tourId);
+        Page<TourRating> tourRatingPage = tourRatingRepository.findByPkTourId(tour.getId(), pageable);
+        List<RatingDto> ratingDtoList = tourRatingPage.getContent()
             .stream()
             .map(tourRating -> toDto(tourRating))
             .collect(Collectors.toList());
+        return new PageImpl<RatingDto>(ratingDtoList, pageable, tourRatingPage.getTotalPages());
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/average")
