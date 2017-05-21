@@ -25,10 +25,7 @@ public interface TourPackageRepository extends CrudRepository<TourPackage, Strin
 
     @Override
     @RestResource(exported = false)
-    default void delete(TourPackage entity) {
-        // TODO Auto-generated method stub
-
-    }
+    void delete(TourPackage entity);
 
     @Override
     @RestResource(exported = false)
