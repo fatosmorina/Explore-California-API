@@ -29,13 +29,6 @@ public class ExplorecaliforniaApplication implements CommandLineRunner {
         SpringApplication.run(ExplorecaliforniaApplication.class, args);
     }
 
-    /**
-     * Method invoked after this class has been instantiated by Spring container
-     * Initializes the in-memory database with all the TourPackages and Tours.
-     *
-     * @param strings
-     * @throws Exception if problem occurs.
-    */
     @Override
     public void run(String... strings) throws Exception {
         tourPackageService.createTourPackage("BC", "Backpack Cal");
