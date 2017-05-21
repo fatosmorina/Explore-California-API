@@ -21,7 +21,7 @@ public class TourRatingController {
     }
 
     private RatingDto toDto(TourRating tourRating) {
-        return new RationDto(tourRating.getScore(), tourRating.getComment(), tourRating.getPk()
+        return new RatingDto(tourRating.getScore(), tourRating.getComment(), tourRating.getPk()
             .getCustomerId());
     }
 
