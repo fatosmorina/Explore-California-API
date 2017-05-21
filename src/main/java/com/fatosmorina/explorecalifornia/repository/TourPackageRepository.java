@@ -13,10 +13,7 @@ public interface TourPackageRepository extends CrudRepository<TourPackage, Strin
 
     @Override
     @RestResource(exported = false)
-    default <S extends TourPackage> S save(S entity) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    <S extends TourPackage> S save(S entity);
 
     @Override
     @RestResource(exported = false)
