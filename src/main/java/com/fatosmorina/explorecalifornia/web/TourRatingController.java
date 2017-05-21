@@ -69,6 +69,20 @@ public class TourRatingController {
         return toDto(tourRatingRepository.save(tourRating));
     }
 
+    @RequestMapping(method = RequestMethod.PUT)
+    public RatingDto updateTourWithPatch(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
+        TourRating tourRating = verifyTourRating(tourId, ratingDto.getCustomerId());
+        Integer score = ratingDto.getScore();
+        String comment = ratingDto.getComment();
+        if (score != null) {
+            tourRating.setScore(score);
+        }
+        if (comment != null && !"".equals(comment)) {
+            tourRating.setComment(comment);
+        }
+        return toDto(tourRatingRepository.save(tourRating));
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
     public String return400(NoSuchElementException exception) {
